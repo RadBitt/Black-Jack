@@ -73,7 +73,7 @@ function Blackjack() {
 
 					Player.setCard(Table.deal()); 
 
-					Table.drawHiddenCard(Player);
+					Table.drawCard(Player, 'hidden');
 
 				}	else Table.drawCard(Player, Player.setCard(Table.deal()));
 

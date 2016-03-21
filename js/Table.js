@@ -49,27 +49,26 @@ function Table() {
 
 	this.drawCard = function(Player, Card) {
 
+		var x, y, attributeString, cardPosition;
 		var playerName = Player.getName();
+		var playerContainerNode = getID(playerName);
+		var playerContainerWidth = playerContainerNode.style.width + 0; 
 		var cardIdString = playerName + '-card-' + Player.totalCards();
-		var cardPosition = Card.getPosition();
-		var x = cardPosition[0];
-		var y = cardPosition[1];
-		var attributeString = 'background: url(' + this.deck.cardsURI + ') ' + x + 'px ' + y + 'px';
 
+		if (Card == 'hidden') {
+			x = -633;
+			y = -1129; 
+		} else {
+			cardPosition = Card.getPosition();
+			x = cardPosition[0];
+			y = cardPosition[1];
+		}
+		
+		attributeString = 'background: url(' + this.deck.cardsURI + ') ' + x + 'px ' + y + 'px';
+		playerContainerNode.style.width = this.deck.cardWidth + 
+			parseInt(playerContainerWidth)
+			 + 'px'; 
 		addElement('div', playerName, [['id', cardIdString], ['class', 'card']]);
-
-		getID(cardIdString).setAttribute('style', attributeString);
-
-	}
-
-	this.drawHiddenCard = function(Player) {
-
-		var playerName = Player.getName(); 
-		var cardIdString = playerName + '-card-' + Player.totalCards();
-		var attributeString = 'background: url(' + this.deck.cardsURI + ') -633px -1129px';
-
-		addElement('div', playerName, [['id', cardIdString], ['class', 'card']]);
-
 		getID(cardIdString).setAttribute('style', attributeString);
 
 	}
@@ -106,7 +105,9 @@ function Table() {
 
 			playerName = Player.getName();
 
-			getID(playerName).removeChildren(); 
+			getID(playerName).removeChildren();
+
+			getID(playerName).style.width = ""; 
 
 			Player.resetCards();
 

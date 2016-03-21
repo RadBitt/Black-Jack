@@ -6,6 +6,10 @@ function Deck(size) {
 
 	this.size = size * 52;
 	this.cards = new Array();
+	this.cardWidth = 183;
+	this.cardHeight = 252;
+	this.xMargin = 27;
+	this.yMargin = 29; 
 	this.cardsURI = '../cards/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.3.svg';
 
 	this.create = function() {
