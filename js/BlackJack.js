@@ -1,3 +1,7 @@
+// Blackjack.js
+// 
+// 
+
 function Blackjack() {
 
 	this.tips = new Tips();
@@ -22,11 +26,15 @@ function Blackjack() {
 
 	this.stay = function() {
 
+		GameFlag.addFlag(1, 1);
+
 		this.control(Players.nextPlayer());
 
 	}
 
 	this.hit = function() {
+
+		GameFlag.addFlag(1, 0);
 
 		Player = Players.currentPlayer();
 
@@ -42,8 +50,8 @@ function Blackjack() {
 
 		Table.round++;
 
-		// Log with flag, 2 = new round
-		GameFlag.addFlag(2);
+		// Log with flag, 0 = gametype message, 2 = new round
+		GameFlag.addFlag(0, 2);
 
 		Players.firstPlayer();
 

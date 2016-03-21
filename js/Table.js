@@ -1,4 +1,4 @@
-// Table v0.1
+// Table.js
 // Card Game Table Object
 // 
 

@@ -1,4 +1,4 @@
-// Deck class v0.1
+// Deck.js
 // Represents a deck or decks of cards as a single deck. 
 // 
 
@@ -57,8 +57,8 @@ function Deck(size) {
 
 		}
 
-		// Log with flag, 0 = new deck;
-		GameFlag.addFlag(0);
+		// Log with flag, 0 = gametype message, 0 = new deck;
+		GameFlag.addFlag(0, 0);
 
 	}
 
@@ -79,8 +79,8 @@ function Deck(size) {
 
 		}
 
-		// Log with flag, 1 = deck shuffled;
-		GameFlag.addFlag(1);
+		// Log with flag, 0 = gametype message, 1 = deck shuffled;
+		GameFlag.addFlag(0, 1);
 
 	}
 

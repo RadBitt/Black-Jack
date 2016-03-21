@@ -1,4 +1,4 @@
-// Buttons v0.1
+// Buttons.js
 // 
 // 
 

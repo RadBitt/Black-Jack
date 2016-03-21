@@ -1,4 +1,4 @@
-// Card Class v0.1
+// Card.js
 // 
 // 
 

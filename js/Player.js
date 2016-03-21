@@ -1,4 +1,4 @@
-// Player v0.1
+// Player.js
 // 
 // 
 
