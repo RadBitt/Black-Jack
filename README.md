@@ -1,5 +1,5 @@
 # Black-Jack
-Build your favorite card game in javascript.
+Build your favorite card game in javascript. Requires the puro.js file in the library folder(A few DOM tools, remove nodes, add nodes, etc). 
 
 Card.js, Deck.js, Player.js, Table.js, and Buttons.js can be used as a framework to make your own card game. 
 
