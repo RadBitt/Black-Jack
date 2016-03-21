@@ -1,0 +1,41 @@
+#container {
+    position: relative;
+    margin: 0 auto;
+    background: url('http://travelzork.com/wp-content/uploads/2015/04/TZ_ENCORESALONSUITE_27.jpg');
+    background-size: cover;
+    padding-top: 10px;
+}
+
+#main-content {
+    max-width: 1280px;
+    min-width: 980px;
+    margin: 0 auto;
+    padding: 0 10px
+}
+
+
+#game-container {
+    margin: 0 auto;
+    padding: 20px 20px 200px 20px;
+    width: 1024px;
+    height: 600px;
+    background: #499D6E;
+    border: 1px solid black;
+    border-radius: 30px;
+}
+
+.hand-container {
+    margin: 0 auto; 
+}
+
+
+.#dealer {
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.card {
+    display: inline-block; 
+    width: 183px; 
+    height: 251px;
+}

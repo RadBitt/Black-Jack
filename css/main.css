@@ -192,21 +192,6 @@ body, html {
 Author's document body container styles
 ========================================================================== */
 
-#container {
-    position: relative;
-    margin: 0 auto;
-    background: url('http://travelzork.com/wp-content/uploads/2015/04/TZ_ENCORESALONSUITE_27.jpg');
-    background-size: cover;
-    padding-top: 10px;
-}
-
-#main-content {
-    max-width: 1280px;
-    min-width: 980px;
-    margin: 0 auto;
-    padding: 0 10px
-}
-
 /* ==========================================================================
 Author's navigation styles
 ========================================================================== */
@@ -216,30 +201,9 @@ Author's navigation styles
 Author's header styles
 ========================================================================== */
 
-#page-header {
-    width: 100%;
-    margin: 0 auto;
-    padding: 20px 0;
-    position: relative;
-}
-
 /* ==========================================================================
 Author's section / article / container styles
 ========================================================================== */
-
-#main-box {
-    float: left;
-    display: inline-block;
-    width: 50%;
-}
-
-.post-container {
-
-}
-
-.single-container {
-/*    margin: 30px;*/
-}
 
 .single-container h1,
 .single-container h3,
@@ -254,40 +218,6 @@ Author's section / article / container styles
 
 .single-container ul {
     margin-left: 1.5%; 
-}
-
-#game-container {
-    margin: 0 auto;
-    padding: 20px 20px 200px 20px;
-    width: 1024px;
-    height: 600px;
-    background: #499D6E;
-    border: 1px solid black;
-    border-radius: 30px;
-}
-
-.hand-container {
-    margin: 0 auto; 
-}
-
-
-.#dealer {
-    margin: 0 auto;
-    padding-top: 20px;
-}
-
-.card {
-    display: inline-block; 
-    width: 183px; 
-    height: 251px;
-}
-
-#login-box {
-    margin: 50px 20px 0 270px;
-    display: inline-block;
-    background-color: lightblue;
-    width: 225px;
-    padding: 20px;
 }
 
 /* ==========================================================================
