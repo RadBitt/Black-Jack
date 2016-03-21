@@ -5,6 +5,8 @@ Players = new Players();
 
 	Players.addPlayer('Player-1');
 
+	Players.addDealer();
+
 Table = new Table();
 
 	Table.setUpGame();

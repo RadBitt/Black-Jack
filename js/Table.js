@@ -43,8 +43,6 @@ function Table() {
 
 		this.newDeck(); 
 
-		Players.addDealer();
-
 		addElement('div', this.tableContainerId, [['id', this.gameContainerId]]); 
 
 	}
