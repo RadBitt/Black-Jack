@@ -42,6 +42,9 @@ function Blackjack() {
 
 		Table.round++;
 
+		// Log with flag, 2 = new round
+		GameFlag.addFlag(2);
+
 		Players.firstPlayer();
 
 		if (Table.round > 1) {
@@ -83,23 +86,25 @@ function Blackjack() {
 		var playerName = Player.getName();
 		var handValue = Player.getHandValue();
 
+		if (playerName === this.dealerName)
+			this.removeButtons();
+
 		if (playerName === this.dealerName && handValue < 21) {
 
 			this.tips.message(playerName + "'s turn. Hand: " + handValue);
 			console.log(playerName + "'s turn. Hand: " + handValue);
-
-			this.removeButtons();
-
 			this.dealerAi(Player);
 
 		} else if (playerName === this.dealerName && handValue === 21) {
 
-			this.endRound();
+			this.tips.message(playerName + " Black Jack! Hand: " + handValue);
+			console.log(playerName + " Black Jack! Hand: " + handValue);
+			this.dealerAi(Player); 
 
 		} else if (playerName === this.dealerName && handValue > 21) {
 
-			this.removeButtons();
-
+			this.tips.message(playerName + " busts!");
+			console.log(playerName + " busts!");
 			this.endRound();
 
 		} else if (playerName != this.dealerName && handValue === 21) {
@@ -115,9 +120,11 @@ function Blackjack() {
 			if (Players.nextPlayer().getName() === this.dealerName) {
 				this.removeButtons();
 				this.endRound();
+			} else {
+				// Next player already set to current player.  
+				this.control(Players.currentPlayer());
 			}
 				 
-
 		} else if (playerName != this.dealerName && handValue < 21) {
 
 			this.tips.message(playerName + "'s turn. Hand: " + handValue);
@@ -148,8 +155,8 @@ function Blackjack() {
 
 			} else if (playerHand < dealerHand && dealerHand <= 21) {
 
-				this.tips.message(dealerName + " beats " + playerName);
-				console.log(dealerName + " beats " + playerName);
+				this.tips.message(dealerName + "'s " + dealerHand + " beats " + playerName);
+				console.log(dealerName + "'s " + dealerHand + " beats " + playerName);
 
 			} else if (playerHand === dealerHand) {
 
@@ -168,8 +175,8 @@ function Blackjack() {
 
 			} else if (playerHand > 21 && dealerHand <= 21) {
 
-				this.tips.message(dealerName + " beats " + playerName);
-				console.log(dealerName + " beats " + playerName);
+				this.tips.message(playerName + " busts " + dealerName + " wins.");
+				this.tips.message(playerName + " busts " + dealerName + " wins.");
 
 			}
 

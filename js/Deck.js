@@ -57,6 +57,9 @@ function Deck(size) {
 
 		}
 
+		// Log with flag, 0 = new deck;
+		GameFlag.addFlag(0);
+
 	}
 
 	this.shuffle = function() {
@@ -75,6 +78,9 @@ function Deck(size) {
 			this.cards[i] = t;
 
 		}
+
+		// Log with flag, 1 = deck shuffled;
+		GameFlag.addFlag(1);
 
 	}
 

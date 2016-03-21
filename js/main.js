@@ -1,4 +1,5 @@
 // Black Jack Main v0.1
+GameFlag = new GameFlags(); 
 
 Players = new Players();
 
@@ -13,7 +14,4 @@ Table = new Table();
 Blackjack = new Blackjack(); 
 
 	Blackjack.startRound();
-
-
-//Game Logic
 
