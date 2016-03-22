@@ -79,6 +79,8 @@ function Players() {
 
 		this.name = name;
 
+		this.money = 0; 
+
 		this.totalCardsInt = 0;
 
 		this.hasAce = false; 

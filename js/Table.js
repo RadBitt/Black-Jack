@@ -12,7 +12,7 @@ function Table() {
 
 	this.gameContainerId = 'game-container';
 
-	this.playerContainerClasses = 'hand-container player-hand'
+	this.playerContainerClasses = 'hand-container'
 
 	this.tipsContainerId = 'tips-container';
 
@@ -45,16 +45,22 @@ function Table() {
 
 		addElement('div', this.tableContainerId, [['id', this.gameContainerId]]); 
 
+		addElement('div', this.tableContainerId, [['id', this.interfaceContainerId]]);
+
 	}
 
 	this.drawCard = function(Player, Card) {
 
-		var x, y, attributeString, cardPosition;
+		var x, y, propertyString, cardPosition;
+		var gameContainerMaxWidth = getID(this.gameContainerId).offsetWidth;
 		var playerName = Player.getName();
 		var playerContainerNode = getID(playerName);
 		var playerContainerWidth = playerContainerNode.style.width + 0; 
-		var cardIdString = playerName + '-card-' + Player.totalCards();
-
+		var totalCards = Player.totalCards(); 
+		var totalCardsWidth = ((totalCards-1) * this.deck.cardWidth);
+		var cardOffset = (totalCards * this.deck.cardOffset) * -1 + (gameContainerMaxWidth / 3);
+		var cardIdString = playerName + '-card-' + (totalCards);
+		
 		if (Card == 'hidden') {
 			x = -633;
 			y = -1129; 
@@ -64,34 +70,41 @@ function Table() {
 			y = cardPosition[1];
 		}
 		
-		attributeString = 'background: url(' + this.deck.cardsURI + ') ' + x + 'px ' + y + 'px';
-		playerContainerNode.style.width = this.deck.cardWidth + 
+		if (totalCardsWidth < gameContainerMaxWidth)
+			playerContainerNode.style.width = this.deck.cardWidth + 
 			parseInt(playerContainerWidth)
-			 + 'px'; 
+			 + 'px';
+
+		propertyString = 'background: url(' + this.deck.cardsURI + ') ' + x + 'px ' + y + 'px;' +
+						  'position: relative;' + 
+						  'top: 0' + '; left: ' + cardOffset + 'px;'; 
 		addElement('div', playerName, [['id', cardIdString], ['class', 'card']]);
-		getID(cardIdString).setAttribute('style', attributeString);
+		getID(cardIdString).setAttribute('style', propertyString);
 
 	}
 
 	this.drawTable = function() {
 
-		var playerName, playerIdString; 
-
-		Players.getDealer();
-
-		for (var i = 0; i < Players.getNumPlayers(); i++) {
-
-			playerName = Players.currentPlayer().getName();
-
-			addElement('div', this.gameContainerId, [['id', playerName], ['class', this.playerContainerClasses]]);
-
-			Players.nextPlayer(); 
-
-		}
+		var playerName, propertyString;
+		var dealerName = Players.getDealer().getName(); 
+		var numPlayers = Players.getNumPlayers(); 
 
 		addElement('div', this.gameContainerId, [['id', this.tipsContainerId]]);
 
-		addElement('div', this.gameContainerId, [['id', this.interfaceContainerId]]);
+		// Dealer first
+		for (var i = 0; i < numPlayers; i++) {
+
+			playerName = Players.currentPlayer().getName();
+			addElement('div', this.gameContainerId, [['id', playerName], ['class', this.playerContainerClasses]]);
+			
+			if (playerName === dealerName)
+				propertyString = 'position: relative;';
+			else
+				propertyString = 'position: fixed; bottom: 5px;';
+
+			getID(playerName).setAttribute('style', propertyString); 
+			Players.nextPlayer();
+		}
 
 	}
 

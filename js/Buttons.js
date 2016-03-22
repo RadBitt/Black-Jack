@@ -8,7 +8,9 @@ function Buttons() {
 
 	this.deal = function() {
 
-		addElement('button', 'user-interface', [['id', 'Deal'], ['onclick', 'Blackjack.startRound()']]);
+		addElement('div', this.containerString, [['id', 'button-container']])
+
+		addElement('button', 'button-container', [['id', 'Deal'], ['onclick', 'Blackjack.startRound()']]);
 
 		getID('Deal').innerHTML = 'Deal';
 
@@ -16,7 +18,9 @@ function Buttons() {
 
 	this.hit = function() {
 
-		addElement('button', 'user-interface', [['id', 'Hit'], ['onclick', 'Blackjack.hit()']]);
+		addElement('div', this.containerString, [['id', 'button-container']])
+
+		addElement('button', 'button-container', [['id', 'Hit'], ['onclick', 'Blackjack.hit()']]);
 
 		getID('Hit').innerHTML = 'Hit';
 
@@ -24,7 +28,9 @@ function Buttons() {
 
 	this.stay = function() {
 
-		addElement('button', 'user-interface', [['id', 'Stay'], ['onclick', 'Blackjack.stay()']]);
+		addElement('div', this.containerString, [['id', 'button-container']])
+
+		addElement('button', 'button-container', [['id', 'Stay'], ['onclick', 'Blackjack.stay()']]);
 
 		getID('Stay').innerHTML = 'Stay';
 

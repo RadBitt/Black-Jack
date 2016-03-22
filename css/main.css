@@ -156,18 +156,9 @@ nav ul li {
     text-transform: uppercase;
 }
 
-/* Off Table Heading*/
-
-#main-h1 {
-    width: 391px;
-    margin: 5px auto;
-}
-
-.off-table {
-    background: white;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 3px 
+.tiny-h1 {
+    font-size: 1em;
+    padding: 1px;
 }
 
 a:link {color:#FFF;}      /* unvisited link */
@@ -196,7 +187,6 @@ Author's document body container styles
 Author's navigation styles
 ========================================================================== */
 
-
 /* ==========================================================================
 Author's header styles
 ========================================================================== */
@@ -204,21 +194,6 @@ Author's header styles
 /* ==========================================================================
 Author's section / article / container styles
 ========================================================================== */
-
-.single-container h1,
-.single-container h3,
-.single-container li,
-.single-container q {
-    margin: 15px 1.5%;
-}
-
-.single-container p {
-    margin: 35px 1.5%;
-}
-
-.single-container ul {
-    margin-left: 1.5%; 
-}
 
 /* ==========================================================================
 Author's form styles

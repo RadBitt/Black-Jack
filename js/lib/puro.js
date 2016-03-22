@@ -54,4 +54,6 @@ function addElement(element, id, attributes) {
 
 	doc.getElementById(id).appendChild(newElement);
 
+	return newElement; 
+
 }

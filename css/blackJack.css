@@ -1,3 +1,17 @@
+/* Off Table Heading*/
+#header {
+    width: 95%;
+    margin: 0 auto;
+    padding: 10px 10px; 
+}
+
+.off-table {
+    background: white;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 3px 
+}
+
 #container {
     position: relative;
     margin: 0 auto;
@@ -7,30 +21,61 @@
 }
 
 #main-content {
-    max-width: 1280px;
-    min-width: 980px;
+    min-width: 600px;
     margin: 0 auto;
-    padding: 0 10px
 }
 
-
 #game-container {
+    width: 900px;
+    min-width: 900px;
     margin: 0 auto;
     padding: 20px 20px 200px 20px;
-    width: 1024px;
-    height: 600px;
+    height: 100%;
     background: #499D6E;
     border: 1px solid black;
     border-radius: 30px;
 }
 
+#user-interface {
+    width: 100%;
+    background: black;
+    position: fixed;
+    bottom: 0px;
+    padding: 8px 0 8px 0;
+}
+
+#user-interface button {
+    padding: 15px;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    background: none;
+    margin-left: 30px;
+}
+
+#button-container {
+    position: relative;
+    left: 350px;
+}
+
+#tips-container {
+    width: 600px;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: 0 auto 20px auto;
+    padding: 5px;
+
+}
+
 .hand-container {
-    margin: 0 auto; 
+    
 }
 
 
 .#dealer {
-    margin: 0 auto;
+    
     padding-top: 20px;
 }
 
