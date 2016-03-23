@@ -36,7 +36,9 @@ function Deck(size) {
 				id = 1;
 				suitesInt++;
 			}
-				
+
+			if (suitesInt > (suites.length-1))
+				suitesInt = 0; 
 		}
 
 		// Assign & calulate Card Positions

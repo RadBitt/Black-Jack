@@ -18,7 +18,9 @@ function Table() {
 
 	this.interfaceContainerId = 'user-interface'; 
 
-	this.deck = new Deck();
+	this.buttonsContainerId = 'button-container'; 
+
+	this.deck = new Deck(6);
 
 	this.deal = function()  {
 
@@ -46,6 +48,8 @@ function Table() {
 		addElement('div', this.tableContainerId, [['id', this.gameContainerId]]); 
 
 		addElement('div', this.tableContainerId, [['id', this.interfaceContainerId]]);
+
+		addElement('div', this.interfaceContainerId, [['id', this.buttonsContainerId]])
 
 	}
 
@@ -106,6 +110,12 @@ function Table() {
 			Players.nextPlayer();
 		}
 
+	}
+
+	this.drawSplit = function(playerName) {
+		addElement('div', this.gameContainerId, [['id', playerName], ['class', this.playerContainerClasses]]);
+		propertyString = 'position: fixed; bottom: 5px; left: 600px;';
+		getID(playerName).setAttribute('style', propertyString);
 	}
 
 	this.cleanUpTable = function() {

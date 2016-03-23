@@ -20,28 +20,58 @@ function Blackjack() {
 
 	this.removeButtons = function() {
 
-		getID(this.buttons.containerString).removeChildren(); 
-
+		getID(Table.buttonsContainerId).removeChildren(); 
 	}
 
 	this.stay = function() {
 
 		GameFlag.addFlag(1, 1);
-
 		this.control(Players.nextPlayer());
-
 	}
 
 	this.hit = function() {
 
 		GameFlag.addFlag(1, 0);
-
 		Player = Players.currentPlayer();
-
 		Table.drawCard(Player, Player.setCard(Table.deal()));
-
 		this.control(Player); 
+	}
 
+	this.splitHand = function() {
+
+		var Player = Players.currentPlayer(); 
+		var playerName = Player.getName();
+		var newHandPlayer = Player;
+		GameFlag.addFlag(1, 2);
+		Card = Player.removeLastCard();
+		getID(playerName + '-card-2').remove(); 
+		playerName += '-split'; 
+
+		// Sets Player to the new split-player-hand
+		newHandPlayer = Players.addPlayer(playerName);
+
+		Table.drawSplit(playerName);
+		Table.drawCard(newHandPlayer, newHandPlayer.setCard(Card));
+		this.control(Players.prevPlayer());
+
+	}
+
+	this.doubleDown = function() {
+
+	}
+
+	this.checkBlackJack = function(Player) {
+		var bool = false;
+		if (Player.getHandValue() === 21)
+			bool = true;
+		return bool;
+	}
+
+	this.checkSplitOption = function(Player) { 
+		if (Player.getHandValue() == 20 || Player.getHandValue() == 10)
+			return false;
+		else
+			return true;
 	}
 
 	this.startRound = function() {
@@ -75,6 +105,10 @@ function Blackjack() {
 						}
 					}
 				} else Table.drawCard(Player, Player.setCard(Table.deal()));
+				if (Player.getName() != 'dealer' && c == 2 && Player.hasPair()) {
+					if(this.checkSplitOption(Player))
+						this.buttons.splitHand(); 
+				}
 				Players.nextPlayer(); 
 			}
 		}
@@ -199,13 +233,6 @@ function Blackjack() {
 
 		}
 
-	}
-
-	this.checkBlackJack = function(Player) {
-		var bool = false;
-		if (Player.getHandValue() === 21)
-			bool = true;
-		return bool;
 	}
 
 	function Tips() {

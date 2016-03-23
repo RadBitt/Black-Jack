@@ -4,11 +4,7 @@
 
 function Buttons() {
 
-	this.containerString = Table.interfaceContainerId; 
-
 	this.deal = function() {
-
-		addElement('div', this.containerString, [['id', 'button-container']])
 
 		addElement('button', 'button-container', [['id', 'Deal'], ['onclick', 'Blackjack.startRound()']]);
 
@@ -18,17 +14,21 @@ function Buttons() {
 
 	this.hit = function() {
 
-		addElement('div', this.containerString, [['id', 'button-container']])
-
 		addElement('button', 'button-container', [['id', 'Hit'], ['onclick', 'Blackjack.hit()']]);
 
 		getID('Hit').innerHTML = 'Hit';
 
 	}
 
-	this.stay = function() {
+	this.splitHand = function() {
 
-		addElement('div', this.containerString, [['id', 'button-container']])
+		addElement('button', 'button-container', [['id', 'Split'], ['onclick', 'Blackjack.splitHand()']]);
+
+		getID('Split').innerHTML = 'Split';
+
+	}
+
+	this.stay = function() {
 
 		addElement('button', 'button-container', [['id', 'Stay'], ['onclick', 'Blackjack.stay()']]);
 

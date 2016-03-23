@@ -8,22 +8,35 @@ function Players() {
 
 	this.firstPlayerInt = 0;
 
+	this.dealerSet = false;
+
 	this.playersArray = new Array();
 
 	this.currentPlayerInt = this.firstPlayerInt; 
-
-	// this.conditions = ['bust', 'win', 'stay'];
 
 	this.getNumPlayers = function() {
 		return this.numberOfPlayers; 
 	}
 
 	this.addPlayer = function(name) {
-		this.playersArray[this.numberOfPlayers] = new Player(name); 
-		this.numberOfPlayers++; 
+		var tempPlayer;
+		// swap dealer into last position after
+		// creating a new player. 
+		if (this.dealerSet) {
+			tempPlayer = this.getDealer();
+			this.playersArray[this.numberOfPlayers-1] = new Player(name);
+			this.numberOfPlayers++;
+			this.playersArray[this.numberOfPlayers-1] = tempPlayer;  
+		} else {
+			this.playersArray[this.numberOfPlayers] = new Player(name);
+			this.numberOfPlayers++;
+		}
+		
+		return this.playersArray[this.numberOfPlayers-2]; 
 	}
 
 	this.addDealer = function() {
+		this.dealerSet = true; 
 		this.playersArray[this.numberOfPlayers] = new Player('dealer');
 		this.numberOfPlayers++;
 	}
@@ -34,6 +47,16 @@ function Players() {
 		this.currentPlayerInt++; 
 		if (this.currentPlayerInt >= this.numberOfPlayers)
 			this.currentPlayerInt = this.firstPlayerInt; 
+			
+		return this.playersArray[this.currentPlayerInt];
+	}
+
+	// @return: the previouse Player
+	// Description: Sets the previous player as the current player.
+	this.prevPlayer = function() {
+		this.currentPlayerInt--; 
+		if (this.currentPlayerInt < 0)
+			this.currentPlayerInt = this.numberOfPlayers; 
 			
 		return this.playersArray[this.currentPlayerInt];
 	}
@@ -71,7 +94,7 @@ function Players() {
 		return this.playersArray[this.currentPlayerInt]; 
 	}
 
-	this.removePlayer = function(name) {
+	this.removeLastPlayer = function() {
 		this.numberOfPlayers--;
 	}
 
@@ -79,13 +102,13 @@ function Players() {
 
 		this.name = name;
 
-		this.money = 0; 
+		this.money = 0;
 
 		this.totalCardsInt = 0;
 
-		this.hasAce = false; 
+		this.handValue = 0;
 
-		this.handValue = 0; 
+		this.hasAce = new Array();
 
 		this.cards = new Array();
 
@@ -94,11 +117,12 @@ function Players() {
 		}
 
 		this.getHandValue = function() {
-			if (this.handValue > 21 && this.hasAce) {
-				this.handValue -= 10;
-				this.hasAce = false; 
+			if (this.hasAce.length > 0) {
+				if (this.handValue > 21) {
+					this.handValue -= 10;
+					this.hasAce.pop(); 
+				}
 			}
-				
 			return this.handValue; 
 		}
 
@@ -110,6 +134,13 @@ function Players() {
 			return this.cards[cardNum]; 
 		}
 
+		this.removeLastCard = function() {
+			var Card = this.cards.pop();
+			this.totalCardsInt--;
+			this.handValue -= Card.getValue(); 
+			return Card; 
+		}
+
 		this.totalCards = function() {
 			return this.totalCardsInt;
 		}
@@ -119,7 +150,7 @@ function Players() {
 			cardVal = Card.getValue();
 			this.handValue += cardVal;
 			if (cardVal == 11) 
-				this.hasAce = true; 
+				this.hasAce.push(true);  
 		}
 
 		// @return: a card object
@@ -133,9 +164,19 @@ function Players() {
 		}
 
 		this.resetCards = function() {
-			this.cards = [];
 			this.totalCardsInt = 0;
-			this.handValue = 0; 
+			this.handValue = 0;
+			this.hasAce = [];
+			this.cards = [];
+		}
+
+		this.hasPair = function() {
+			var card1 = this.getCard(0).getValue();
+			var card2 = this.getCard(1).getValue();
+			if (card1 == card2)
+				return true;
+			else 
+				return false; 
 		}
 
 	}
