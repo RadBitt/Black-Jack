@@ -24,7 +24,7 @@ function Table() {
 
 	this.deal = function()  {
 
-		if (Table.deck.cardsLeft() == 0) {
+		if (Table.deck.cardsLeft() == 1) {
 
 			this.newDeck(); 
 
@@ -114,25 +114,32 @@ function Table() {
 
 	this.drawSplit = function(playerName) {
 		addElement('div', this.gameContainerId, [['id', playerName], ['class', this.playerContainerClasses]]);
-		propertyString = 'position: fixed; bottom: 5px; left: 600px;';
+		propertyString = 'position: fixed; bottom: 5px; left: 350px;';
 		getID(playerName).setAttribute('style', propertyString);
 	}
 
 	this.cleanUpTable = function() {
 
 		var Player, playerName, cardIdString;
+		var numPlayers = Players.getNumPlayers(); 
 
-		for (var p = 0; p < Players.getNumPlayers(); p++) {
+		for (var p = 0; p < numPlayers; p++) {
 
 			Player = Players.currentPlayer(); 
 
-			playerName = Player.getName();
+			playerName = Player.getName(); 
 
 			getID(playerName).removeChildren();
 
-			getID(playerName).style.width = ""; 
+			getID(playerName).style.width = "";
 
-			Player.resetCards();
+			if (playerName.slice(playerName.length - 6, playerName.length) == '-split') {
+
+				getID(playerName).remove();
+
+				Players.removeCurrent(); 
+
+			} else Player.resetCards();
 
 			Players.nextPlayer(); 
 

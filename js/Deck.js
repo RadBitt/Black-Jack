@@ -8,7 +8,7 @@ function Deck(size) {
 	this.cards = new Array();
 	this.cardWidth = 183;
 	this.cardHeight = 252;
-	this.cardOffset = this.cardWidth - 50; 
+	this.cardOffset = this.cardWidth - 28; 
 	this.xMargin = 27;
 	this.yMargin = 29; 
 	this.cardsURI = '../cards/52_Cards_Color_Faces_Set/Color_52_Faces_v.2.3.svg';

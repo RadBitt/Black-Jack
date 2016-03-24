@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 /* Off Table Heading*/
 #header {
     width: 95%;
@@ -54,8 +58,8 @@
 }
 
 #button-container {
-    position: relative;
-    left: 350px;
+    width: 900px;
+    margin: 0 auto; 
 }
 
 #tips-container {

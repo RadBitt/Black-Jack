@@ -47,7 +47,7 @@ function Blackjack() {
 		getID(playerName + '-card-2').remove(); 
 		playerName += '-split'; 
 
-		// Sets Player to the new split-player-hand
+		// Now work with new hand. 
 		newHandPlayer = Players.addPlayer(playerName);
 
 		Table.drawSplit(playerName);

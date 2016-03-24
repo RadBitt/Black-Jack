@@ -94,8 +94,12 @@ function Players() {
 		return this.playersArray[this.currentPlayerInt]; 
 	}
 
-	this.removeLastPlayer = function() {
+	this.removeCurrent = function() {
+		var Dealer = this.playersArray[this.numberOfPlayers-1]
+		this.playersArray[this.currentPlayerInt] = Dealer;
 		this.numberOfPlayers--;
+		this.currentPlayerInt--;
+		this.playersArray.length = this.numberOfPlayers; 
 	}
 
 	function Player(name) {
@@ -108,6 +112,7 @@ function Players() {
 
 		this.handValue = 0;
 
+		// Blackjack specific property of hands.
 		this.hasAce = new Array();
 
 		this.cards = new Array();
@@ -116,6 +121,7 @@ function Players() {
 			return this.name; 
 		}
 
+		// Blackjack specific conditions
 		this.getHandValue = function() {
 			if (this.hasAce.length > 0) {
 				if (this.handValue > 21) {
@@ -134,10 +140,14 @@ function Players() {
 			return this.cards[cardNum]; 
 		}
 
+		// BlackJack Specific
 		this.removeLastCard = function() {
 			var Card = this.cards.pop();
 			this.totalCardsInt--;
-			this.handValue -= Card.getValue(); 
+			if (Card.getValue() == 11)
+				this.handValue -= 1
+			else
+				this.handValue -= Card.getValue(); 
 			return Card; 
 		}
 
@@ -170,6 +180,7 @@ function Players() {
 			this.cards = [];
 		}
 
+		// Blackjack specific funtion
 		this.hasPair = function() {
 			var card1 = this.getCard(0).getValue();
 			var card2 = this.getCard(1).getValue();
