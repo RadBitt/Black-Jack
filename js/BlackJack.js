@@ -33,7 +33,7 @@ function Blackjack() {
 
 		GameFlag.addFlag(1, 0);
 		Player = Players.currentPlayer();
-		Table.drawCard(Player, Player.setCard(Table.deal()));
+		Table.drawCard(Player, Player.addCard(Table.deal()));
 		this.control(Player); 
 	}
 
@@ -51,7 +51,7 @@ function Blackjack() {
 		newHandPlayer = Players.addPlayer(playerName);
 
 		Table.drawSplit(playerName);
-		Table.drawCard(newHandPlayer, newHandPlayer.setCard(Card));
+		Table.drawCard(newHandPlayer, newHandPlayer.addCard(Card));
 		this.control(Players.prevPlayer());
 
 	}
@@ -92,10 +92,10 @@ function Blackjack() {
 				Player = Players.currentPlayer();
 				if (Player.getName() === 'dealer') {
 					if (c == 1) {
-						Player.setCard(Table.deal()); 
+						Player.addCard(Table.deal()); 
 						Table.drawCard(Player, 'hidden');
 					} else if (c == 2) {
-						Player.setCard(dealerCard = Table.deal());
+						Player.addCard(dealerCard = Table.deal());
 						Table.drawCard(Player, dealerCard); 
 						if (dealerCard.getValue() == 11) {
 							if(this.checkBlackJack(Player)) {
@@ -104,7 +104,7 @@ function Blackjack() {
 							}
 						}
 					}
-				} else Table.drawCard(Player, Player.setCard(Table.deal()));
+				} else Table.drawCard(Player, Player.addCard(Table.deal()));
 				if (Player.getName() != 'dealer' && c == 2 && Player.hasPair()) {
 					if(this.checkSplitOption(Player))
 						this.buttons.splitHand(); 
@@ -203,7 +203,7 @@ function Blackjack() {
 				this.tips.message(playerName + " busts " + dealerName + " wins.");
 				this.tips.message(playerName + " busts " + dealerName + " wins.");
 			}
-			Players.nextPlayer(); 
+			Players.nextPlayer();
 		}
 		this.buttons.deal(); 
 	}
