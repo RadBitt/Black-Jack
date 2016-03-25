@@ -23,6 +23,8 @@ function Table() {
 	this.deck = new Deck(6);
 
 	this.newDeck = function() {
+<<<<<<< HEAD
+=======
 
 		this.deck.create();
 
@@ -30,6 +32,18 @@ function Table() {
 
 	}
 
+	this.deal = function()  {
+
+		if (Table.deck.cardsLeft() == 1) {
+>>>>>>> origin/master
+
+		this.deck.create();
+
+		this.deck.shuffle();
+
+	}
+
+<<<<<<< HEAD
 	this.deal = function()  {
 
 		if (Table.deck.cardsLeft() == 0) {
@@ -41,6 +55,8 @@ function Table() {
 		return this.deck.getTopCard(); 
 	}
 
+=======
+>>>>>>> origin/master
 	this.setUpGame = function() {
 
 		this.newDeck(); 
@@ -119,7 +135,11 @@ function Table() {
 // ================================================ */
 Table.prototype.drawSplit = function(playerName) {
 	addElement('div', this.gameContainerId, [['id', playerName], ['class', this.playerContainerClasses]]);
+<<<<<<< HEAD
 	propertyString = 'position: fixed; bottom: 5px; margin-left: 400px;';
+=======
+	propertyString = 'position: fixed; bottom: 5px; left: 350px;';
+>>>>>>> origin/master
 	getID(playerName).setAttribute('style', propertyString);
 }
 
