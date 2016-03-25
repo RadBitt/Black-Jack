@@ -41,6 +41,20 @@ function Players() {
 		this.numberOfPlayers++;
 	}
 
+	// @return: the first player in the players array
+	// Description: Returns the first player. 
+	// 				and first player is set as current player. 
+	this.firstPlayer = function() {
+		this.currentPlayerInt = this.firstPlayerInt; 
+		return this.playersArray[this.currentPlayerInt]; 
+	}
+
+	// @return: the current player in the player array
+	// Description: Returns the current player. 
+	this.currentPlayer = function() {
+		return this.playersArray[this.currentPlayerInt]; 
+	}
+
 	// @return: the Next Player
 	// Description: Sets the next player as the current player.
 	this.nextPlayer = function() {
@@ -61,6 +75,14 @@ function Players() {
 		return this.playersArray[this.currentPlayerInt];
 	}
 
+	// @return: the dealer player
+	// Description: Returns the dealer player. 
+	// 				and dealer is set as current player. 
+	this.getDealer = function() {
+		this.currentPlayerInt = this.numberOfPlayers - 1; 
+		return this.playersArray[this.currentPlayerInt]; 
+	}
+
 	// @return: the next player
 	// Description: Returns the next player. 
 	// 				does not set as current player. 
@@ -70,28 +92,6 @@ function Players() {
 			this.currentPlayerInt = this.firstPlayerInt; 
 			
 		return this.playersArray[this.currentPlayerInt];
-	}
-
-	// @return: the current player in the player array
-	// Description: Returns the current player. 
-	this.currentPlayer = function() {
-		return this.playersArray[this.currentPlayerInt]; 
-	}
-
-	// @return: the first player in the players array
-	// Description: Returns the first player. 
-	// 				and first player is set as current player. 
-	this.firstPlayer = function() {
-		this.currentPlayerInt = this.firstPlayerInt; 
-		return this.playersArray[this.currentPlayerInt]; 
-	}
-
-	// @return: the dealer player
-	// Description: Returns the dealer player. 
-	// 				and dealer is set as current player. 
-	this.getDealer = function() {
-		this.currentPlayerInt = this.numberOfPlayers - 1; 
-		return this.playersArray[this.currentPlayerInt]; 
 	}
 
 	this.removeCurrent = function() {
@@ -108,28 +108,14 @@ function Players() {
 
 		this.money = 0;
 
-		this.totalCardsInt = 0;
-
-		this.handValue = 0;
-
-		// Blackjack specific property of hands.
-		this.hasAce = new Array();
-
 		this.cards = new Array();
 
 		this.getName = function() {
 			return this.name; 
 		}
 
-		// Blackjack specific conditions
-		this.getHandValue = function() {
-			if (this.hasAce.length > 0) {
-				if (this.handValue > 21) {
-					this.handValue -= 10;
-					this.hasAce.pop(); 
-				}
-			}
-			return this.handValue; 
+		this.totalCards = function() {
+			return this.cards.length;
 		}
 
 		// @return: a card object
@@ -140,56 +126,75 @@ function Players() {
 			return this.cards[cardNum]; 
 		}
 
-		// BlackJack Specific
-		this.removeLastCard = function() {
-			var Card = this.cards.pop();
-			this.totalCardsInt--;
-			if (Card.getValue() == 11)
-				this.handValue -= 1
-			else
-				this.handValue -= Card.getValue(); 
-			return Card; 
-		}
-
-		this.totalCards = function() {
-			return this.totalCardsInt;
-		}
-
-		this.addValue = function(Card) {
-			var cardVal;
-			cardVal = Card.getValue();
-			this.handValue += cardVal;
-			if (cardVal == 11) 
-				this.hasAce.push(true);  
-		}
-
 		// @return: a card object
 		// @param: a card object
 		// Description: Returns the card just set.
 		this.setCard = function(Card) {
-			this.totalCardsInt++;
-			this.addValue(Card); 
 			this.cards.push(Card);
 			return Card; 
 		}
 
-		this.resetCards = function() {
-			this.totalCardsInt = 0;
-			this.handValue = 0;
-			this.hasAce = [];
-			this.cards = [];
+		this.removeCard = function() {
+			var Card = this.cards.pop();
+			return Card; 
 		}
 
-		// Blackjack specific funtion
-		this.hasPair = function() {
-			var card1 = this.getCard(0).getValue();
-			var card2 = this.getCard(1).getValue();
-			if (card1 == card2)
-				return true;
-			else 
-				return false; 
-		}
+	}
 
+	/* ================================================ //
+	* 	Black Jack Specific Functions that Extend Player
+	// ================================================ */
+	Player.prototype.handValue = 0;
+
+	Player.prototype.hasAce = new Array();
+
+	Player.prototype.hasPair = function() {
+		var card1 = this.getCard(0).getValue();
+		var card2 = this.getCard(1).getValue();
+		if (card1 == card2)
+			return true;
+		else 
+			return false; 
+	}
+
+	Player.prototype.removeLastCard = function() {
+		var Card = this.cards.pop();
+		if (Card.getValue() == 11)
+			this.handValue -= 1
+		else
+			this.handValue -= Card.getValue(); 
+		return Card; 
+	}
+
+	Player.prototype.addCard = function(Card) {
+		this.addValue(Card); 
+		this.cards.push(Card);
+		return Card; 
+	}
+
+	Player.prototype.addValue = function(Card) {
+		var cardVal;
+		cardVal = Card.getValue();
+		this.handValue += cardVal;
+		if (cardVal == 11) 
+			this.hasAce.push(true);  
+	}
+
+	Player.prototype.getHandValue = function() {
+		if (this.hasAce.length > 0) {
+			if (this.handValue > 21) {
+				this.handValue -= 10;
+				this.hasAce.pop(); 
+			}
+		}
+		return this.handValue; 
+	}
+
+	Player.prototype.resetHand = function() {
+		this.totalCardsInt = 0;
+		this.handValue = 0;
+		this.hasAce = [];
+		this.cards = [];
 	}
 
 }

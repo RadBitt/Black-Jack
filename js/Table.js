@@ -22,23 +22,23 @@ function Table() {
 
 	this.deck = new Deck(6);
 
-	this.deal = function()  {
-
-		if (Table.deck.cardsLeft() == 1) {
-
-			this.newDeck(); 
-
-		} 
-
-		return this.deck.getTopCard(); 
-	}
-
 	this.newDeck = function() {
 
 		this.deck.create();
 
 		this.deck.shuffle();
 
+	}
+
+	this.deal = function()  {
+
+		if (Table.deck.cardsLeft() == 0) {
+
+			this.newDeck(); 
+
+		} 
+
+		return this.deck.getTopCard(); 
 	}
 
 	this.setUpGame = function() {
@@ -112,38 +112,41 @@ function Table() {
 
 	}
 
-	this.drawSplit = function(playerName) {
-		addElement('div', this.gameContainerId, [['id', playerName], ['class', this.playerContainerClasses]]);
-		propertyString = 'position: fixed; bottom: 5px; left: 350px;';
-		getID(playerName).setAttribute('style', propertyString);
-	}
+}
 
-	this.cleanUpTable = function() {
+/* ================================================ //
+* 	Black Jack Specific Functions that extend Table
+// ================================================ */
+Table.prototype.drawSplit = function(playerName) {
+	addElement('div', this.gameContainerId, [['id', playerName], ['class', this.playerContainerClasses]]);
+	propertyString = 'position: fixed; bottom: 5px; margin-left: 400px;';
+	getID(playerName).setAttribute('style', propertyString);
+}
 
-		var Player, playerName, cardIdString;
-		var numPlayers = Players.getNumPlayers(); 
+Table.prototype.cleanUpTable = function() {
 
-		for (var p = 0; p < numPlayers; p++) {
+	var Player, playerName, cardIdString;
+	var numPlayers = Players.getNumPlayers(); 
 
-			Player = Players.currentPlayer(); 
+	for (var p = 0; p < numPlayers; p++) {
 
-			playerName = Player.getName(); 
+		Player = Players.currentPlayer(); 
 
-			getID(playerName).removeChildren();
+		playerName = Player.getName(); 
 
-			getID(playerName).style.width = "";
+		getID(playerName).removeChildren();
 
-			if (playerName.slice(playerName.length - 6, playerName.length) == '-split') {
+		getID(playerName).style.width = "";
 
-				getID(playerName).remove();
+		if (playerName.slice(playerName.length - 6, playerName.length) == '-split') {
 
-				Players.removeCurrent(); 
+			getID(playerName).remove();
 
-			} else Player.resetCards();
+			Players.removeCurrent(); 
 
-			Players.nextPlayer(); 
+		} else Player.resetHand();
 
-		}
+		Players.nextPlayer(); 
 
 	}
 

@@ -6,17 +6,10 @@ function Card(id, suite) {
 
 	this.suite = suite;
 	this.id = id;
-	this.position; 
+	this.position = []; 
 
-	this.getValue = function() {
-
-		if (this.id == 1)
-			return 11;
-		if (this.id > 10)
-			return 10;
-
+	this.getId = function() {
 		return this.id;
-
 	}
 
 	this.getSuite = function() {
@@ -31,4 +24,16 @@ function Card(id, suite) {
 		this.position = [x, y]; 
 	}
 
+}
+
+/* ================================================ //
+* 	Black Jack Specific Functions that Extend Card
+// ================================================ */
+
+Card.prototype.getValue = function() {
+	if (this.id == 1)
+		return 11;
+	if (this.id > 10)
+		return 10;
+	return this.id;
 }
