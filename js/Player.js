@@ -173,8 +173,7 @@ function Players() {
 	}
 
 	Player.prototype.addValue = function(Card) {
-		var cardVal;
-		cardVal = Card.getValue();
+		var cardVal = Card.getValue();
 		this.handValue += cardVal;
 		if (cardVal == 11) 
 			this.hasAce.push(true);  

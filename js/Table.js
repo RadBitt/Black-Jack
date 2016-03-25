@@ -32,16 +32,6 @@ function Table() {
 
 	this.deal = function()  {
 
-		if (Table.deck.cardsLeft() == 1) {
-
-		this.deck.create();
-
-		this.deck.shuffle();
-
-	}
-
-	this.deal = function()  {
-
 		if (Table.deck.cardsLeft() == 0) {
 
 			this.newDeck(); 
@@ -130,7 +120,6 @@ function Table() {
 Table.prototype.drawSplit = function(playerName) {
 	addElement('div', this.gameContainerId, [['id', playerName], ['class', this.playerContainerClasses]]);
 	propertyString = 'position: fixed; bottom: 5px; margin-left: 400px;';
-	propertyString = 'position: fixed; bottom: 5px; left: 350px;';
 	getID(playerName).setAttribute('style', propertyString);
 }
 
