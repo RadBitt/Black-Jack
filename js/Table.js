@@ -49,7 +49,9 @@ function Table() {
 
 		addElement('div', this.tableContainerId, [['id', this.interfaceContainerId]]);
 
-		addElement('div', this.interfaceContainerId, [['id', this.buttonsContainerId]])
+		addElement('div', this.interfaceContainerId, [['id', this.tipsContainerId]]);
+
+		addElement('div', this.interfaceContainerId, [['id', this.buttonsContainerId]]);
 
 	}
 
@@ -93,8 +95,6 @@ function Table() {
 		var dealerName = Players.getDealer().getName(); 
 		var numPlayers = Players.getNumPlayers(); 
 
-		addElement('div', this.gameContainerId, [['id', this.tipsContainerId]]);
-
 		// Dealer first
 		for (var i = 0; i < numPlayers; i++) {
 
@@ -104,7 +104,7 @@ function Table() {
 			if (playerName === dealerName)
 				propertyString = 'position: relative;';
 			else
-				propertyString = 'position: fixed; bottom: 5px;';
+				propertyString = 'position: fixed; bottom: 55px;';
 
 			getID(playerName).setAttribute('style', propertyString); 
 			Players.nextPlayer();
